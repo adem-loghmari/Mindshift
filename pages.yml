@@ -35,4 +35,4 @@ jobs:
 
       # Configure custom domain
       - name: Configure custom domain
-        run: echo "mindshift.gdsc.com" > ./dist/CNAME  # Replace with your domain
+        run: echo "mindshift.gdsc2025.com" > ./dist/CNAME  # Replace with your domain
