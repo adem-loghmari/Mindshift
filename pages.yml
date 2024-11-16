@@ -1,0 +1,38 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Adjust to your publishing branch if different
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Set up Node.js (optional if using a Node.js-based static site generator)
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Adjust to your version
+
+      # Build the site (adjust this step based on your site generator)
+      - name: Build site
+        run: |
+          npm install
+          npm run build  # Ensure this command builds your static site
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist  # Replace with your build output directory
+
+      # Configure custom domain
+      - name: Configure custom domain
+        run: echo "mindshift.gdsc.com" > ./dist/CNAME  # Replace with your domain
